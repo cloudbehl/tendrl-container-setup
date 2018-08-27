@@ -14,3 +14,7 @@ $ docker build --rm -t ankushbehl/tendrl-centos .
 $ docker build --rm -t ankushbehl/gluster-centos Centos/.
 $ sh tendrl-setup.sh
 ```
+## remove the data and containers
+```sh
+$ sh tendrl-clean.sh
+```
