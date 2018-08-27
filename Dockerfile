@@ -15,12 +15,14 @@ yum --setopt=tsflags=nodocs -y install etcd; \
 yum --setopt=tsflags=nodocs -y install tendrl-node-agent; \
 yum --setopt=tsflags=nodocs -y install tendrl-api; \
 yum --setopt=tsflags=nodocs -y install tendrl-ui; \
-yum --setopt=tsflags=nodocs -y install tendrl-monitoring-integration; \
+yum --setopt=tsflags=nodocs -y  --nogpgcheck install tendrl-monitoring-integration; \
 yum --setopt=tsflags=nodocs -y install tendrl-notifier; \
 yum clean all;
 
 
-RUN sed -i.bak '/^\s\s:host/s/:\s.*/:\ tendrlserver/' /etc/tendrl/etcd.yml; \
+RUN sed -i.bak '/^etcd_connection/s/:.*/:\ tendrlserver/' /etc/tendrl/node-agent/node-agent.conf.yaml; \
+sed -i.bak '/^graphite_host/s/:.*/:\ tendrlserver/' /etc/tendrl/node-agent/node-agent.conf.yaml; \
+sed -i.bak '/^\s\s:host/s/:\s.*/:\ tendrlserver/' /etc/tendrl/etcd.yml; \
 sed -i.bak '/^CONF_DIR=/s/=.*/=\/etc\/tendrl\/monitoring-integration\/grafana\//' /etc/sysconfig/grafana-server; \
 sed -i.bak '/^CONF_FILE=/s/=.*/=\/etc\/tendrl\/monitoring-integration\/grafana\/grafana.ini/' /etc/sysconfig/grafana-server; \
 sed -i.bak '/^datasource_host/s/:.*/:\ tendrlserver/' /etc/tendrl/monitoring-integration/monitoring-integration.conf.yaml; \
@@ -38,11 +40,12 @@ systemctl enable tendrl-monitoring-integration; \
 systemctl enable tendrl-notifier; \
 systemctl enable httpd;
 
-ADD create-password.sh /usr/local/bin/create-password.sh
+ADD etcd.sh /usr/local/bin/etcd.sh
 
-RUN chmod +x /usr/local/bin/create-password.sh
+RUN chmod +x /usr/local/bin/etcd.sh
 
 EXPOSE 2379 2003 10080 80 3000 8789
 
-ENTRYPOINT ["/usr/local/bin/create-password.sh"]
+ENTRYPOINT ["/usr/local/bin/etcd.sh"]
 CMD ["/usr/sbin/init"]
+
