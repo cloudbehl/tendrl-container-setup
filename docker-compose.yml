@@ -15,10 +15,6 @@ services:
         ipv4_address: 10.5.0.3
     privileged: true
     volumes:
-    - /var/log/glusterfs1:/var/log/glusterfs:z
-    - /var/lib/glusterd1:/var/lib/glusterd:z
-    - /etc/glusterfs1:/etc/glusterfs:z
-    - /dev/:/dev
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
   glusternode2:
     container_name: gluster2
@@ -29,10 +25,6 @@ services:
         ipv4_address: 10.5.0.4
     privileged: true
     volumes:
-    - /var/log/glusterfs2:/var/log/glusterfs:z
-    - /var/lib/glusterd2:/var/lib/glusterd:z
-    - /etc/glusterfs2:/etc/glusterfs:z
-    - /dev/:/dev
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
   glusternode3:
     container_name: gluster3
@@ -43,10 +35,6 @@ services:
         ipv4_address: 10.5.0.5
     privileged: true
     volumes:
-    - /var/log/glusterfs3:/var/log/glusterfs:z
-    - /var/lib/glusterd3:/var/lib/glusterd:z
-    - /etc/glusterfs3:/etc/glusterfs:z
-    - /dev/:/dev
     - /sys/fs/cgroup:/sys/fs/cgroup:ro
   tendrlnode:
     container_name: tendrl_server

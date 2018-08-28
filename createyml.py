@@ -1,11 +1,25 @@
+import ConfigParser
 import yaml
+import io
 
 data = {}
 
 with open('docker-compose.yml', 'rw') as f:
   containeryml = yaml.load(f)
 
-for i in range(1,4):
+# Load the configuration file
+with open("config.ini") as f:
+    sample_config = f.read()
+
+config = ConfigParser.RawConfigParser(allow_no_value=True)
+config.readfp(io.BytesIO(sample_config))
+
+node_count = config.get('storage', 'node')
+data_type = config.get('storage', 'data')
+
+
+
+for i in range(1, int(node_count)+1):
   servicename = "glusternode" + str(i)
   ip = "10.5.0." + str(i + 2);
   hostname = "gluster" + str(i)
@@ -15,14 +29,20 @@ for i in range(1,4):
   data[servicename]["hostname"] = hostname
   data[servicename]["networks"] = {}
   data[servicename]["networks"]["vpcbr"] = {"ipv4_address": ip}
+  
+  if(data_type == "persist"):
+    data[servicename]["volumes"] = [
+     "/var/log/glusterfs" + str(i) +":/var/log/glusterfs:z",
+     "/var/lib/glusterd" + str(i) + ":/var/lib/glusterd:z",
+     "/etc/glusterfs" + str(i) +":/etc/glusterfs:z",
+     "/dev/:/dev",
+     "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    ]
+  else:
+    data[servicename]["volumes"] = [
+     "/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    ]
 
-  data[servicename]["volumes"] = [
-   "/var/log/glusterfs" + str(i) +":/var/log/glusterfs:z",
-   "/var/lib/glusterd" + str(i) + ":/var/lib/glusterd:z",
-   "/etc/glusterfs" + str(i) +":/etc/glusterfs:z",
-   "/dev/:/dev",
-   "/sys/fs/cgroup:/sys/fs/cgroup:ro"
-  ]
   data[servicename]["container_name"] = hostname
 
 

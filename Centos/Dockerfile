@@ -78,7 +78,6 @@ tendrl-dependencies-epel-7.repo \
 
 RUN yum --setopt=tsflags=nodocs -y install epel-release; \
 yum --setopt=tsflags=nodocs -y install tendrl-node-agent tendrl-collectd-selinux  tendrl-selinux; \
-yum --setopt=tsflags=nodocs -y install tendrl-gluster-integration.noarch; \
 yum clean all; \
 sed -i.bak '/^etcd_connection/s/:.*/:\ tendrlserver/' /etc/tendrl/node-agent/node-agent.conf.yaml; \
 sed -i.bak '/^graphite_host/s/:.*/:\ tendrlserver/' /etc/tendrl/node-agent/node-agent.conf.yaml; \
