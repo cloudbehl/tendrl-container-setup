@@ -3,7 +3,9 @@
 python createyml.py
 
 docker-compose up -d
+
 sleep 3
+
 tendrlip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' tendrl_server)
 
 for i in `docker ps -a | grep -v "tendrl_server" | awk 'NR>1 {print $1}'`; do
