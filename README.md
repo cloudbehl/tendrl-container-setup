@@ -25,10 +25,3 @@ $ docker exec -it {container-id/Name} /bin/bash
 ```
 > example: docker exec -it tendrl_server /bin/bash
 
-## Building the latest code locally
-```sh
-$ git clone https://github.com/cloudbehl/tendrl-container
-$ docker build --rm -t ankushbehl/tendrl-centos .
-$ docker build --rm -t ankushbehl/gluster-centos Centos/.
-$ sh tendrl-setup.sh
-```
