@@ -30,7 +30,7 @@ for i in range(1, int(node_count)+1):
   data[servicename]["networks"] = {}
   data[servicename]["networks"]["vpcbr"] = {"ipv4_address": ip}
   
-  if(data_type == "persist"):
+  if(data_type == "persistent"):
     data[servicename]["volumes"] = [
      "/var/log/glusterfs" + str(i) +":/var/log/glusterfs:z",
      "/var/lib/glusterd" + str(i) + ":/var/lib/glusterd:z",
