@@ -2,7 +2,7 @@
 Tendrl Container allows user to create a tendrl setup with a minimal number of steps.
 
 ## Prerequisite
-docker and docker-compose should be installed in the machine and the docker service should be running.
+`docker` and `docker-compose` should be installed in the machine and the docker service should be running.
 ```sh
 $ sudo yum install docker docker-compose
 $ sudo service docker start
