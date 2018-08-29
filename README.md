@@ -14,7 +14,7 @@ $ git clone https://github.com/cloudbehl/tendrl-container
 $ cd tendrl-container
 $ sh tendrl-setup.sh
 ```
-## remove the containers and data 
+## Stop the running the containers and data 
 ```sh
 $ sh tendrl-clean.sh
 ```
