@@ -2,7 +2,7 @@
 
 ## Getting tendrl up and running
 ```sh
-$ sudo yum install docker
+$ sudo yum install docker docker-compose
 $ service docker start
 $ git clone https://github.com/cloudbehl/tendrl-container
 $ sh tendrl-setup.sh
