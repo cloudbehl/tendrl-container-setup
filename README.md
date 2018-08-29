@@ -12,7 +12,7 @@ By default there will be 3 gluster containers and 1 tendrl container that will r
 ```sh
 $ git clone https://github.com/cloudbehl/tendrl-container
 $ cd tendrl-container
-$ sudo sh tendrl-setup.sh
+$ sh tendrl-setup.sh
 ```
 ## remove the containers and data 
 ```sh
