@@ -16,10 +16,10 @@ config.readfp(io.BytesIO(sample_config))
 
 node_count = config.get('storage', 'node')
 data_type = config.get('storage', 'data')
+clusters = config.get('storage', 'clusters')
+gluster_nodes = (int(node_count) * int(clusters)) + 1
 
-
-
-for i in range(1, int(node_count)+1):
+for i in range(1, gluster_nodes):
   servicename = "glusternode" + str(i)
   ip = "10.5.0." + str(i + 2);
   hostname = "gluster" + str(i)
